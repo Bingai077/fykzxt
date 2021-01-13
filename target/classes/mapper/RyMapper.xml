@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xsyy.form.mapper.RyMapper">
+
+    <resultMap id="ysyyMap" type="com.xsyy.form.domain.DingDingRenYuan">
+
+        <result property="empCode" column="emp_code" javaType="java.lang.String"></result>
+        <result property="empName" column="emp_name" javaType="java.lang.String"></result>
+        <result property="deptCode" column="dept_code" javaType="java.lang.String"></result>
+        <result property="deptName" column="dept_name" javaType="java.lang.String"></result>
+        <result property="titleCode" column="title_code" javaType="java.lang.String"></result>
+        <result property="titleName" column="title_name" javaType="java.lang.String"></result>
+    </resultMap>
+
+    <select id="getRymx" resultMap="ysyyMap">
+        select * from renyuan_dingding where emp_code = #{empCode}
+    </select>
+
+
+</mapper> 

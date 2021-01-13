@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>费用控制系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="/static/css/homepage.css">
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--    <link rel="stylesheet" href="/static/css/bootstrap.min.css">-->
+<!--    <script src="/static/js/jquery.min.js"></script>-->
+<!--    <script src="/static/js/bootstrap.min.js"></script>-->
+</head>
+<body>
+<div th:include="../static/common/headbar::headbar"></div>
+<div th:fragment="homepage">
+    <nav class="nav nav-tabs" style="margin-top:50px;background-color: #EEEEEE">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">表单审批</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/dingdingform/chucai">出差单</a></li>
+                    <li class="active"><a href="#">报销单</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            采购单
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">总院</a></li>
+                            <li><a href="#">分院</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" style="color: #000000"><span th:text="${dingUser.userName}+',欢迎您'"
+                                                             class="glyphicon glyphicon-user"></span>&nbsp;</a></li>
+<!--                <li><a href="#" style="color: #000000"><span-->
+<!--                                                             class="glyphicon glyphicon-user">陈斌杰，欢迎您</span>&nbsp;</a></li>-->
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>&nbsp;退出</a></li>
+            </ul>
+
+        </div>
+    </nav>
+</div>
+
+<a href="/dingdingform/chucai">
+    <div class="square1">
+        <div class="no-logo">出差审批单</div>
+    </div>
+</a>
+
+<a href="#">
+    <div class="square1">
+        <div class="no-logo">集团报销单</div>
+    </div>
+</a>
+
+<a href="#">
+    <div class="square1">
+        <div class="no-logo">总院采购单</div>
+    </div>
+</a>
+
+<a href="#">
+    <div class="square1">
+        <div class="no-logo">分院采购单</div>
+    </div>
+</a>
+
+</body>
+</html>

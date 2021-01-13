@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <!--    <th:block th:include="include :: header('基本表单')" />-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <title text="出差审批单"></title>
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../static/css/font-awesome.min.css" rel="stylesheet"/>
+    <!-- bootstrap-table 表格插件样式 -->
+    <link href="../static/ajax/libs/bootstrap-table/bootstrap-table.min.css?v=20201129" rel="stylesheet"/>
+    <link href="../static/css/animate.css" rel="stylesheet"/>
+    <link href="../static/css/style.css?v=20200903" rel="stylesheet"/>
+    <link href="../static/ruoyi/css/ry-ui.css?v=4.6.0" rel="stylesheet"/>
+    <link href="../static/css/main/style.min862f.css" rel="stylesheet"/>
+    <!--时间和日期-->
+    <link href="../static/ajax/libs/datapicker/bootstrap-datetimepicker.min.css" rel="stylesheet"/>
+
+    <!-- 页头样式 -->
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/homepage.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body class="gray-bg">
+
+<!--<div th:include="../static/common/headbar::headbar"></div>-->
+
+<!--<div th:include="./homePage::homepage"></div>-->
+
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+
+        <!--        <div class="col-sm-2"></div>-->
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+
+                <div class="text-center">
+                    <h3>出差审批</h3>
+                </div>
+
+                <!--                <div class="hr-line-solid"></div>-->
+
+                <div class="ibox-content">
+                    <form method="get" class="form-horizontal">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">出差人</label>
+                            <div class="col-sm-3">
+                                <span th:text="${dingUser.userName}" class="form-control" name="userName" id="userName"></span>
+                                <!--                                <input type="text" th:text="${dingUser.userName}" class="form-control">-->
+                                <input type="hidden" th:value="${dingUser.userId}" name="userId" id="userId"/>
+                                <input type="hidden" th:value="${dingUser.deptId}" name="deptId" id="deptId"/>
+                                <input type="hidden" th:value="${dingUser.jobNumber}" name="jobNumber" id="jobNumber"/>
+
+                            </div>
+                            <label class="col-sm-3 control-label">职称</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="zc">
+                            </div>
+                        </div>
+                        <!--                        <div class="hr-line-dashed"></div>-->
+
+                        <!--                        <div class="form-group">-->
+                        <!--                            <label class="col-sm-3 control-label">职称</label>-->
+                        <!--                            <div class="col-sm-7">-->
+                        <!--                                <input type="text" class="form-control">-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="hr-line-dashed"></div>-->
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">科室</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="ks">
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">出差事由</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control">
+                                <!--                                <span class="help-block m-b-none">帮助文本，可能会超过一行，以块级元素显示</span>-->
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">主办单位</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control">
+                                <!--                                <span class="help-block m-b-none">帮助文本，可能会超过一行，以块级元素显示</span>-->
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+
+                        <div class="form-group" id="element1">
+                            <label class="col-sm-2 control-label">出发城市</label>
+                            <div class="col-sm-3">
+                                <select class="province form-control m-b" data-first-title="选择省">
+                                    <option value="">请选择</option>
+                                    <option value="浙江省" selected>浙江省</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <select class="city form-control m-b" data-first-title="选择市">
+                                    <option value="">请选择</option>
+                                    <option value="宁波市" selected>宁波市</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <select class="area form-control m-b" data-first-title="选择地区">
+                                    <option value="">请选择</option>
+                                    <option value="象山县" selected>象山县</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group" id="element2">
+                            <label class="col-sm-2 control-label">目的城市</label>
+                            <div class="col-sm-3">
+                                <select class="province form-control m-b" data-first-title="选择省">
+                                    <option value="">请选择</option>
+                                    <option value="浙江省" selected>浙江省</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <select class="city form-control m-b" data-first-title="选择市">
+                                    <option value="">请选择</option>
+                                    <option value="宁波市" selected>宁波市</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-3">
+                                <select class="area form-control m-b" data-first-title="选择地区">
+                                    <option value="">请选择</option>
+                                    <option value="象山县" selected>象山县</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">开始时间</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="laydate-startTime" placeholder="年-月-日"/>
+                            </div>
+
+                            <label class="col-sm-3 control-label">结束时间</label>
+
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" id="laydate-endTime" placeholder="年-月-日"/>
+                            </div>
+                        </div>
+
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">交通工具</label>
+                            <div class="col-sm-9">
+                                <select class="form-control">
+                                    <option value="">--请选择交通工具--</option>
+                                    <option value="火车">火车</option>
+                                    <option value="汽车">汽车</option>
+                                    <option value="飞机">飞机</option>
+                                    <option value="其他">其他</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!--                        <div class="form-group">-->
+                        <!--                            <label class="col-sm-3 control-label">交通工具</label>-->
+                        <!--                            <div class="col-sm-7">-->
+                        <!--                                <input type="text" class="form-control">-->
+                        <!--                            </div>-->
+                        <!--                        </div>-->
+
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">费用计划</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control">
+                                <!--                                <span class="help-block m-b-none">帮助文本，可能会超过一行，以块级元素显示</span>-->
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+
+                        <!--                        <div class="form-group">-->
+                        <!--                            <label class="col-sm-2 control-label">预算明细</label>-->
+                        <!--&lt;!&ndash;                            <div class="col-sm-9">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                <input type="text" class="form-control">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+                        <!--                        </div>-->
+                        <div class="text-center">
+                            <h4>预算明细</h4>
+                        </div>
+
+                        <div class="form-groups" id="details">
+
+                            <!--                        <div class="hr-line-dashed"></div>-->
+                            <div class="form-group" id="element3">
+                                <label class="col-sm-2 control-label">预算项目</label>
+                                <div class="col-sm-9">
+                                    <select class="type form-control m-b" data-first-title="请选择预算项目" id='ysxm'
+                                            name='ysxm'>
+                                        <option value="">--请选择预算项目--</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <!--                        <div class="hr-line-dashed"></div>-->
+                            <div class="form-group" id="element4">
+                                <label class="col-sm-2 control-label">预算科目</label>
+                                <div class="col-sm-9">
+
+                                    <select class="type form-control m-b" data-first-title="请选择预算科目" id='yskm'
+                                            name='yskm'>
+                                        <option value="">--请选择预算科目--</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--                        <div class="hr-line-dashed"></div>-->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">预算剩余金额</label>
+                                <div class="col-sm-3">
+                                    <input id="yssyje" type="text" class="form-control">
+                                </div>
+                                <label class="col-sm-3 control-label">预算总金额</label>
+                                <div class="col-sm-3">
+                                    <input id="yszje" type="text" class="form-control">
+                                </div>
+
+                            </div>
+                            <!--                        <div class="hr-line-dashed"></div>-->
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">占比</label>
+                                <div class="col-sm-3">
+                                    <input id="zb" type="text" class="form-control">
+                                </div>
+                                <!--                            <label class="col-sm-3 control-label">占比</label>-->
+                                <!--                            <div class="col-sm-3">-->
+                                <!--                                <input type="text" class="form-control">-->
+                                <!--                            </div>-->
+                            </div>
+                            <!--                        <div class="hr-line-dashed"></div>-->
+                            <!--                        <div class="form-group">-->
+                            <!--                            <label class="col-sm-2 control-label">预算占比</label>-->
+                            <!--                            <div class="col-sm-9">-->
+                            <!--                                <input type="text" class="form-control">-->
+                            <!--                            </div>-->
+                            <!--                        </div>-->
+                            <!--                        <div class="hr-line-dashed"></div>-->
+                            <!--                        <div class="form-group">-->
+                            <!--                            <label class="col-sm-2 control-label">总预算余额</label>-->
+                            <!--                            <div class="col-sm-9">-->
+                            <!--                                <input type="text" class="form-control">-->
+                            <!--                            </div>-->
+                            <!--                        </div>-->
+
+
+                            <div class="hr-line-dashed"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class=" col-sm-5 col-sm-offset-5">
+                                <button type="button" class="btn btn-success btn-sm btn-rounded" id="add-btn"
+                                        onclick="add_div()">添加明细
+                                </button>
+                                <button type="button" class="btn btn-primary btn-sm btn-rounded" id="del-btn"
+                                        onclick="del_div()">删除明细
+                                </button>
+                            </div>
+                        </div>
+
+
+                        <!--                        <div class="hr-line-dashed"></div>-->
+                        <div class="hr-line-solid"></div>
+
+                        <div class="form-group">
+                            <div class=" col-sm-5 col-sm-offset-5">
+                                <button class="btn btn-success btn-lg btn-rounded" type="submit" href="#">提交</button>
+                                <button class="btn btn-primary btn-lg btn-rounded" type="submit" href="#">取消</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!--        <div class="col-sm-2"></div>-->
+
+    </div>
+
+</div>
+
+
+<!--<th:block th:include="include :: footer" />-->
+<!--<a id="scroll-up" href="#" class="btn btn-sm display"><i class="fa fa-angle-double-up"></i></a>-->
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<!-- bootstrap-table 表格插件 -->
+<script src="../static/ajax/libs/bootstrap-table/bootstrap-table.min.js?v=20201129"></script>
+<script src="../static/ajax/libs/bootstrap-table/locale/bootstrap-table-zh-CN.min.js?v=20201129"></script>
+<script src="../static/ajax/libs/bootstrap-table/extensions/mobile/bootstrap-table-mobile.min.js?v=20201129"></script>
+<!-- jquery-validate 表单验证插件 -->
+<script src="../static/ajax/libs/validate/jquery.validate.min.js"></script>
+<script src="../static/ajax/libs/validate/messages_zh.min.js"></script>
+<script src="../static/ajax/libs/validate/jquery.validate.extend.js"></script>
+<!-- jquery-validate 表单树插件 -->
+<script src="../static/ajax/libs/bootstrap-treetable/bootstrap-treetable.js"></script>
+<!-- 遮罩层 -->
+<script src="../static/ajax/libs/blockUI/jquery.blockUI.js"></script>
+<script src="../static/ajax/libs/iCheck/icheck.min.js"></script>
+<script src="../static/ajax/libs/layer/layer.min.js"></script>
+<script src="../static/ajax/libs/layui/layui.js"></script>
+<script src="../static/ruoyi/js/common.js?v=4.6.0"></script>
+<script src="../static/ruoyi/js/ry-ui.js?v=4.6.0"></script>
+<!--时间和日期-->
+<script src="../static/ajax/libs/datapicker/bootstrap-datetimepicker.min.js"></script>
+<!--多级下拉联动-->
+<script src="../static/ajax/libs/cxselect/jquery.cxselect.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        <!-- datetimepicker示例 -->
+        $("#datetimepicker-demo-1").datetimepicker();
+
+        $("#datetimepicker-demo-2").datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("#datetimepicker-demo-3").datetimepicker({
+            format: "yyyy-mm-dd hh:ii:ss",
+            autoclose: true
+        });
+
+        $('.form_date').datetimepicker({
+            format: "yyyy-mm-dd",
+            minView: "month",
+            autoclose: true
+        });
+
+        $("#datetimepicker-startTime").datetimepicker({
+            format: 'yyyy-mm-dd',
+            minView: "month",
+            todayBtn: true,
+            autoclose: true,
+            endDate: new Date(),
+        }).on('changeDate', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var startTime = event.date;
+            $('#datetimepicker-endTime').datetimepicker('setStartDate', startTime);
+        });
+
+        $("#datetimepicker-endTime").datetimepicker({
+            format: 'yyyy-mm-dd',
+            minView: "month",
+            todayBtn: true,
+            autoclose: true,
+            endDate: new Date(),
+        }).on('changeDate', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var endTime = event.date;
+            $("#datetimepicker-startTime").datetimepicker('setEndDate', endTime);
+        });
+
+        <!-- laydate示例 -->
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+
+            laydate.render({
+                elem: '#laydate-demo-1'
+            });
+
+            laydate.render({
+                elem: '#laydate-demo-2',
+                type: 'date'
+            });
+
+            laydate.render({
+                elem: '#laydate-demo-3',
+                type: 'datetime',
+                trigger: 'click'
+            });
+
+            laydate.render({
+                elem: '#laydate-demo-4',
+                range: true
+            });
+
+            var startDate = laydate.render({
+                elem: '#laydate-startTime',
+                max: $('#laydate-endTime').val(),
+                theme: 'molv',
+                trigger: 'click',
+                done: function (value, date) {
+                    // 结束时间大于开始时间
+                    if (value !== '') {
+                        endDate.config.min.year = date.year;
+                        endDate.config.min.month = date.month - 1;
+                        endDate.config.min.date = date.date;
+                    } else {
+                        endDate.config.min.year = '';
+                        endDate.config.min.month = '';
+                        endDate.config.min.date = '';
+                    }
+                }
+            });
+
+            var endDate = laydate.render({
+                elem: '#laydate-endTime',
+                min: $('#laydate-startTime').val(),
+                theme: 'molv',
+                trigger: 'click',
+                done: function (value, date) {
+                    // 开始时间小于结束时间
+                    if (value !== '') {
+                        startDate.config.max.year = date.year;
+                        startDate.config.max.month = date.month - 1;
+                        startDate.config.max.date = date.date;
+                    } else {
+                        startDate.config.max.year = '';
+                        startDate.config.max.month = '';
+                        startDate.config.max.date = '';
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+<script th:inline="javascript">
+    // 直接返回获取
+    var data = [[${data}]];
+    $('#element').cxSelect({
+        selects: ['type', 'router'],
+        jsonValue: 'v',
+        data: data
+    });
+
+    // 通过默认url获取
+    var urlChina = '/dingdingform/cityData';
+    $.cxSelect.defaults.url = urlChina;
+    $('#element1').cxSelect({
+        selects: ['province', 'city', 'area'],
+        nodata: 'none'
+    });
+
+    // 通过默认url获取
+    // var urlChina = '/dingdingform/cityData';
+    $.cxSelect.defaults.url = urlChina;
+    $('#element2').cxSelect({
+        selects: ['province', 'city', 'area'],
+        nodata: 'none'
+    });
+
+    // // 通过默认url获取
+    // // jsonName: 'n',          // 数据标题字段名称
+    // //jsonValue: '',          // 数据值字段名称
+    // //jsonSub: 's'            // 子集数据字段名称
+    // var urlYsxm = '/dingdingyusuanxm';
+    // $.cxSelect.defaults.url = urlYsxm;
+    // $.cxSelect.defaults.jsonName = 'result';
+    // $.cxSelect.defaults.jsonSub = 'acctBudgName';
+    // $('#element3').cxSelect({
+    //     selects: 'ysxm',
+    //     nodata: 'none'
+    // });
+
+
+</script>
+
+<script type="text/javascript">
+    var detail_div = 1;
+
+    function add_div() {
+        var e = document.getElementById("details");
+        var div = document.createElement("div");
+        div.className = "form-groups";
+        div.id = "details" + detail_div;
+        div.innerHTML = e.innerHTML;
+        document.getElementById("details").appendChild(div);
+        detail_div++;
+    }
+
+    function del_div() {
+        var id = "details" + (detail_div - 1).toString();
+        var e = document.getElementById(id);
+        document.getElementById("details").removeChild(e);
+        detail_div--;
+    }
+
+    //提交json数据并在控制台打印
+    // function add() {
+    //     var arr = {};
+    //     var data = $("form").serializeArray();
+    //     $.each(data,function () {
+    //         arr[this.name] = this.value;
+    //     });
+    //     var jsondata = JSON.stringify(arr);
+    //     console.log(jsondata);
+    //     $.ajax({
+    //         url:"index.html",
+    //         type:"post",
+    //         data:jsondata,
+    //         success:function f() {
+    //             console.log("chenggong");
+    //         }
+    //     })
+    // }
+
+
+
+
+    $.post('http://bingai.vaiwan.com/dingdingRymx',{empCode:$("#jobNumber").val()},
+        function(data,status){
+            var rymx = JSON.parse(JSON.stringify(data.result));
+            // this.volume = parentData.容量总数;
+            $('#zc').val(rymx.titleName);
+            $('#ks').val(rymx.deptName);
+            // console.log(status);
+        });
+
+
+    // $.ajax({
+    //     url: "http://bingai.vaiwan.com/dingdingyusuan",
+    //     type:"GET",
+    //     dataType: "json",
+    //     success: function (data) {
+    //         var ysmxList = eval(data.result);
+    //         for (var i = 0; i < ysmxList.length; i++) {
+    //             $("#ysxm").append('<option value="' + ysmxList[i].acctBudgCode + '" >' + ysmxList[i].acctBudgName+ '</option>');
+    //             $("#yskm").append('<option value="' + ysmxList[i].budgSubjCode + '" >' + ysmxList[i].budgSubjName+ '</option>');
+    //             $('#yssyje').val(ysmxList[i].remainAmount);
+    //             $('#yszje').val(ysmxList[i].contractRemainAmount);
+    //             $('#zb').val(ysmxList[i].remainAmount/ysmxList[i]);
+    //         }
+    //     }
+    // });
+
+
+
+    $.ajax({
+        url: "/dingdingyusuanxm",
+        type:"GET",
+        dataType: "json",
+        success: function (data) {
+            var ysxmList = eval(data.result);
+            for (var i = 0; i < ysxmList.length; i++) {
+                $("#ysxm").append('<option value="' + ysxmList[i].acctBudgCode + '" >' + ysxmList[i].acctBudgName+ '</option>');
+                //(new Option(funList[i].acctBudgName))
+            }
+        }
+    });
+
+    $.ajax({
+        url: "/dingdingyusuankm",
+        type:"GET",
+        dataType: "json",
+        success: function (data) {
+            var yskmList = eval(data.result);
+            for (var i = 0; i < yskmList.length; i++) {
+                $("#yskm").append('<option value="' + yskmList[i].budgSubjCode + '" >' + yskmList[i].budgSubjName+ '</option>');
+                //(new Option(funList[i].acctBudgName))
+            }
+        }
+    });
+
+    // function getYsmx(){
+    //     var yskm = $("#yskm").val();  //输入框中的值
+    //     var ysxm = $("#ysxm").val();  //输入框中的值
+    //
+    //     if(yskm.length != 0 && ysxm.length != 0){
+    //         $.post('http://bingai.vaiwan.com/dingdingyusuanByKmAndXm',{acctBudgCode:ysxm,budgSubjCode:yskm},
+    //             function(data,status){
+    //             var ysmx = JSON.parse(JSON.stringify(data.result));
+    //                 // this.volume = parentData.容量总数;
+    //             $('#yssyje').val(ysmx.remainAmount);
+    //             $('#yszje').val(ysmx.contractRemainAmount);
+    //             $('#zb').val(ysmx.remainAmount/ysmx.contractRemainAmount+'%');
+    //                 // console.log(status);
+    //
+    //         });
+    //     }
+    // };
+
+
+
+
+
+</script>
+
+
+</body>
+</html>

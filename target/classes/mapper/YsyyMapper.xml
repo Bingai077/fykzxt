@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xsyy.form.mapper.YsyyMapper">
+
+    <resultMap id="ysyyMap" type="com.xsyy.form.domain.DingDingYuSuan">
+        <result property="acctYear" column="acct_year" javaType="java.lang.String"></result>
+        <result property="typeCode" column="type_code" javaType="java.lang.String"></result>
+        <result property="typeName" column="type_name" javaType="java.lang.String"></result>
+        <result property="acctBudgCode" column="acct_budg_code" javaType="java.lang.String"></result>
+        <result property="acctBudgName" column="acct_budg_name" javaType="java.lang.String"></result>
+        <result property="budgSubjCode" column="budg_subj_code" javaType="java.lang.String"></result>
+        <result property="budgSubjName" column="budg_subj_name" javaType="java.lang.String"></result>
+        <result property="deptCode" column="dept_code" javaType="java.lang.String"></result>
+        <result property="deptName" column="dept_name" javaType="java.lang.String"></result>
+        <result property="contractRemainAmount" column="contract_remain_amount" javaType="java.math.BigDecimal"></result>
+        <result property="remainAmount" column="remain_amount" javaType="java.math.BigDecimal"></result>
+    </resultMap>
+
+    <resultMap id="cglxMap" type="com.xsyy.form.domain.DingDingYuSuanCGLX">
+        <result property="typeCode" column="type_code" javaType="java.lang.String"></result>
+        <result property="typeName" column="type_name" javaType="java.lang.String"></result>
+    </resultMap>
+
+    <resultMap id="ysxmMap" type="com.xsyy.form.domain.DingDingYuSuanXM">
+        <result property="acctBudgCode" column="acct_budg_code" javaType="java.lang.String"></result>
+        <result property="acctBudgName" column="acct_budg_name" javaType="java.lang.String"></result>
+    </resultMap>
+
+    <resultMap id="yskmMap" type="com.xsyy.form.domain.DingDingYuSuanKM">
+        <result property="budgSubjCode" column="budg_subj_code" javaType="java.lang.String"></result>
+        <result property="budgSubjName" column="budg_subj_name" javaType="java.lang.String"></result>
+    </resultMap>
+
+
+
+    <select id="getAllYS" resultMap="ysyyMap">
+        select * from yusuan_dingding
+    </select>
+
+    <select id="getAllYsCglx" resultMap="cglxMap">
+        select DISTINCT(type_code),type_name from yusuan_dingding
+    </select>
+
+    <select id="getAllYsKm" resultMap="yskmMap">
+        select DISTINCT(budg_subj_code),budg_subj_name from yusuan_dingding
+    </select>
+
+    <select id="getAllYsXm" resultMap="ysxmMap">
+        select DISTINCT(acct_budg_code),acct_budg_name from yusuan_dingding
+    </select>
+
+    <select id="getYsXmByCglx" resultMap="ysxmMap">
+        select acct_budg_code,acct_budg_name from yusuan_dingding where type_code = #{typeCode}
+    </select>
+
+    <select id="getYsXmByKm" resultMap="ysxmMap">
+        select acct_budg_code,acct_budg_name from yusuan_dingding where budg_subj_code = #{budgSubjCode}
+    </select>
+
+    <select id="getYsKmByXm" resultMap="yskmMap">
+        select budg_subj_code,budg_subj_name from yusuan_dingding where acct_budg_code = #{acctBudgCode}
+    </select>
+
+
+    <select id="getYsByKmAndXm" resultMap="ysyyMap">
+        select * from yusuan_dingding where budg_subj_code = #{budgSubjCode} and acct_budg_code = #{acctBudgCode}
+    </select>
+
+
+</mapper>
